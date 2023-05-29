@@ -14,8 +14,15 @@ describe('TripService', () => {
     });
 
 
-    it ('should message Error', ()=>{
-        assert.throws(tripService.getTripsByUser(user), Error);
-    })
+    it('should message Error', () => {
+        assert.throws(() => {
+            tripService.getTripsByUser(user);
+        }, { name: 'Error', message: 'TripDAO should not be invoked on a unit test.' });
+    });
+
+    it('should return null for getUser', () => {
+        const testTripService = new TestTripServices();
+        assert.strictEqual(testTripService.getUser(), null);
+    });
 
 });
